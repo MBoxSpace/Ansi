@@ -5,9 +5,9 @@ import FootlessParser
 typealias Value = (String, [Code])
 private let manager = NSFontManager.shared
 
-func process(string: String, using font: NSFont) throws -> NSAttributedString {
+func process(string: String, using font: NSFont, default color: NSColor) throws -> NSAttributedString {
   do {
-    return apply(try FootlessParser.parse(Pro.ansi, string), using: font)
+    return apply(try FootlessParser.parse(Pro.ansi, string), using: font, default: color)
   } catch ParseError<Character>.Mismatch(let remainder, let expected, let actual) {
     throw AnsiError.mismatch(string, remainder, expected, actual)
   } catch (let error) {
@@ -16,9 +16,9 @@ func process(string: String, using font: NSFont) throws -> NSAttributedString {
 }
 
 // Apply colors in @colors to @string
-func apply(_ attrs: [Value], using aFont: NSFont) -> NSAttributedString {
+func apply(_ attrs: [Value], using aFont: NSFont, default aColor: NSColor) -> NSAttributedString {
   let sections = attrs.reduce([] as [NSAttributedString]) { acc, attr in
-    let attrs = attr.1.reduce([] as [StringStyle.Part]) { acc, code in
+    var attrs = attr.1.reduce([.color(aColor)] as [StringStyle.Part]) { acc, code in
       switch code {
       case .underline(true):
         return acc + [.underline(.single, nil)]
