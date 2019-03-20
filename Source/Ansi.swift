@@ -3,7 +3,7 @@ import BonMot
 import FootlessParser
 
 typealias Value = (String, [Code])
-private let manager = NSFontManager.shared()
+private let manager = NSFontManager.shared
 
 func process(string: String, using font: NSFont) throws -> NSAttributedString {
   do {
@@ -21,9 +21,9 @@ func apply(_ attrs: [Value], using aFont: NSFont) -> NSAttributedString {
     let attrs = attr.1.reduce([] as [StringStyle.Part]) { acc, code in
       switch code {
       case .underline(true):
-        return acc + [.underline(.styleSingle, nil)]
+        return acc + [.underline(.single, nil)]
       case .strikethrough(true):
-        return acc + [.strikethrough(.styleSingle, nil)]
+        return acc + [.strikethrough(.single, nil)]
       case let .color(.background, color):
         return acc + [.backgroundColor(color.toNSColor())]
       case let .color(.foreground, color):

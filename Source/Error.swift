@@ -2,7 +2,7 @@ import FootlessParser
 import Foundation
 
 public enum AnsiError: Error, CustomStringConvertible {
-  typealias Index = String.CharacterView.Index
+  typealias Index = String.Index
   case mismatch(String, AnyCollection<Character>, String, String)
   case generic(String, String)
 
