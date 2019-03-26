@@ -16,18 +16,22 @@ public enum Color: Equatable {
 
   public func toNSColor() -> NSColor {
     switch self {
-    case .red:
-      return NSColor(hex: "#ff0000")
-    case .white:
-      return NSColor(hex: "#ffffff")
     case .black:
       return NSColor(hex: "#000000")
-    case .blue:
-      return NSColor(hex: "#0000ff")
+    case .red:
+      return NSColor(hex: "#ff0000")
     case .green:
       return NSColor(hex: "#00ff00")
     case .yellow:
       return NSColor(hex: "#ffff00")
+    case .blue:
+      return NSColor(hex: "#0000ff")
+    case .magenta:
+      return NSColor(hex: "#ff00ff")
+    case .cyan:
+      return NSColor(hex: "#00ffff")
+    case .white:
+      return NSColor(hex: "#ffffff")
     case let .rgb(red, green, blue):
       let r1 = String(format: "%2X", red)
       let g1 = String(format: "%2X", green)
@@ -38,9 +42,6 @@ public enum Color: Equatable {
       return NSColor(hex: "#" + int)
     case .default:
       // TODO: What's the default color?
-      return NSColor(hex: "#000000")
-    default:
-      /* TODO ... */
       return NSColor(hex: "#000000")
     }
   }
